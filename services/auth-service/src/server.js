@@ -1,22 +1,32 @@
 import express from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+
 import { router } from "./routes/index.js";
-import path from 'path';
 
 const PORT = process.env.PORT || 3001;
-const __dirname = path.resolve();
 
 const app = express();
+const isProd = process.env.NODE_ENV === 'production';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static(path.join(__dirname, '../../apps/auth-front/dist')));
+if (!isProd) {
+  app.use(
+    '/',
+    createProxyMiddleware({
+      target: 'http://localhost:5173',
+      changeOrigin: true,
+      ws: true,
+      logLevel: 'debug',
+      filter: (req) => req.method === 'GET'
+    })
+  );
+}
 
-// Routes
 app.use(router);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../../apps/auth-front/dist/index.html'));
-// });
-
-app.listen(PORT, () => console.log(`🚀 Auth Service running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log('\x1b[32m%s\x1b[0m', `🚀 Auth Service running on port ${PORT}`);
+  console.log('\x1b[36m%s\x1b[0m', `➜ Local:   http://localhost:${PORT}/`);
+});

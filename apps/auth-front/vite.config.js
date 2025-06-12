@@ -4,24 +4,28 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-// https://vite.dev/config/
 export default defineConfig({
+  base: '/registration',
   plugins: [
     vue(),
     vueDevTools(),
   ],
   server: {
-    proxy: {
-      '^/$': {
+    proxy: [
+      {
+        context: /^\/$/,
         target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: () => '/registration'
+        logLevel: 'info',
+        rewrite: () => '/registration',
       },
-      '/registration': {
+      {
+        context: /^\/registration/,
         target: 'http://localhost:3001',
-        changeOrigin: true
+        changeOrigin: true,
+        logLevel: 'info',
       }
-    }
+    ]
   },
   resolve: {
     alias: {
