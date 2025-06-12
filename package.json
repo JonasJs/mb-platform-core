@@ -1,19 +1,24 @@
 {
-  "name": "mb-monorepo",
+  "name": "mb-platform-core",
   "private": true,
   "version": "1.0.0",
   "workspaces": [
     "apps/*",
-    "services/*"
+    "services/*",
+    "packages/*"
   ],
   "scripts": {
     "dev": "npm-run-all --parallel dev:auth-front dev:auth-service",
     "dev:auth-front": "npm run dev --workspace=apps/auth-front",
     "dev:auth-service": "npm run dev --workspace=services/auth-service",
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
   },
   "dependencies": {
-    "http-proxy-middleware": "^3.0.5",
     "npm-run-all": "^4.1.5"
+  },
+  "devDependencies": {
+    "eslint": "^9.28.0",
+    "prettier": "^3.5.3"
   }
 }

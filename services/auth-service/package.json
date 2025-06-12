@@ -1,16 +1,22 @@
 {
-  "name": "auth-service",
+  "name": "@mb-platform/auth-service",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --no-deprecation --watch src/server.js",
-    "start": "node src/server.js"
+    "dev": "node --watch src/server.js",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5"
   },
   "overrides": {
     "http-proxy": "npm:http-proxy-node16@^1.0.6"
+  },
+  "devDependencies": {
+    "@mb-platform/eslint-config": "^1.0.0",
+    "eslint": "^9.28.0"
   }
 }
