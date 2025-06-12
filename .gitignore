@@ -1,0 +1,24 @@
+
+node_modules/
+package-lock.json
+.env
+.env.local
+.env.*.local
+
+dist/
+build/
+
+*.log
+npm-debug.log*
+
+.cache/
+.vite/
+.npm/
+
+# Coverage reports
+coverage/
+
+.DS_Store
+
+# IDE
+.vscode/
