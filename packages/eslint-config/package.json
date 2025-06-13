@@ -8,6 +8,10 @@
     "vue.js",
     "prettier.js"
   ],
+  "extends": [
+    "@mb-platform/eslint-config/node",
+    "@mb-platform/eslint-config/vue"
+  ],
   "peerDependencies": {
     "eslint": "^9.28.0"
   },

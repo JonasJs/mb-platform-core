@@ -12,27 +12,24 @@
     "dev:auth-front": "npm run dev --workspace=apps/auth-front",
     "dev:auth-service": "npm run dev --workspace=services/auth-service",
     "build": "npm run build --workspaces --if-present",
-    "lint": "npm-run-all --parallel lint:root lint:workspaces",
-    "lint:root": "eslint . --ext .js,.jsx,.mjs,.vue --fix --ignore-pattern 'apps/**' --ignore-pattern 'services/**' --ignore-pattern 'packages/**'",
-    "lint:workspaces": "npm run lint --workspaces --if-present",
-    "format": "npm-run-all --parallel format:root format:workspaces",
-    "format:root": "prettier --write --ignore-path .gitignore .",
-    "format:workspaces": "npm run format --workspaces --if-present",
-    "lint:staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky install",
+    "lint": "npm run eslint:format --workspaces --if-present",
+    "format": "npm run prettier:format --workspaces --if-present",
+    "eslint:format": "npm run eslint:format --workspaces --if-present",
+    "prettier:format": "npm run prettier:format --workspaces --if-present"
   },
   "lint-staged": {
-    "*.{js,jsx,mjs,vue}": [
-      "eslint --fix",
-      "prettier --write"
+    "*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "npm run eslint:format --workspaces --if-present -- --cache --fix"
     ],
-    "*.{css,scss,json,md}": [
+    "*.@(css|scss|json|md)": [
       "prettier --write"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "npx lint-staged && npm run lint",
       "commit-msg": "npx commitlint --edit $1"
     }
   },

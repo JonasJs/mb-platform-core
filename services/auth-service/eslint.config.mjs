@@ -1,3 +1,3 @@
-import config from '@mb-platform/eslint-config/node.mjs'
+import config from "@mb-platform/eslint-config/node.mjs";
 
-export default config
+export default config;

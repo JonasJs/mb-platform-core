@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "eslint:format": "eslint src --fix",
+    "prettier:format": "prettier --write ."
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -16,7 +16,6 @@
     "http-proxy": "npm:http-proxy-node16@^1.0.6"
   },
   "devDependencies": {
-    "@mb-platform/eslint-config": "^1.0.0",
-    "eslint": "^9.28.0"
+    "@mb-platform/eslint-config": "^1.0.0"
   }
 }
