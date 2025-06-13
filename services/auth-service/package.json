@@ -1,0 +1,21 @@
+{
+  "name": "@mb-platform/auth-service",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "eslint:format": "eslint src --fix",
+    "prettier:format": "prettier --write ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5"
+  },
+  "overrides": {
+    "http-proxy": "npm:http-proxy-node16@^1.0.6"
+  },
+  "devDependencies": {
+    "@mb-platform/eslint-config": "^1.0.0"
+  }
+}

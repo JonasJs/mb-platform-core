@@ -1,0 +1,22 @@
+{
+  "name": "@mb-platform/eslint-config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "common.mjs",
+  "files": [
+    "node.js",
+    "vue.js",
+    "prettier.js"
+  ],
+  "extends": [
+    "@mb-platform/eslint-config/node",
+    "@mb-platform/eslint-config/vue"
+  ],
+  "peerDependencies": {
+    "eslint": "^9.28.0"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.28.0",
+    "neostandard": "^0.12.1"
+  }
+}
