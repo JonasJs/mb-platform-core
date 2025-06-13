@@ -4,8 +4,8 @@ function isObject(obj) {
   return obj !== null && typeof obj === 'object'
 }
 
-export function validateSchema(schema, data) {
-  if (!isObject(schema) || !isObject(data)) {
+export function validateSchema({ schema, data }) {
+  if (!isObject(schema) || !isObject(data) || !schema?.fields) {
     return {
       success: false,
       errors: {
@@ -14,15 +14,19 @@ export function validateSchema(schema, data) {
     }
   }
 
+  const { fields: schemaFields } = schema
+
   const validData = {}
   const validationErrors = {}
 
-  for (const property in schema) {
-    const schemaPropertyType = schema[property]?.type ?? schema[property]
+  for (const property in schemaFields) {
+    const schemaPropertyType =
+      schemaFields[property]?.type ?? schemaFields[property]
     const propertyValue = data[property]
 
-    const hasParamRequired = typeof schema[property]?.required === 'boolean'
-    const isRequired = hasParamRequired && schema[property].required
+    const hasParamRequired =
+      typeof schemaFields[property]?.required === 'boolean'
+    const isRequired = hasParamRequired && schemaFields[property].required
 
     if (isRequired && propertyValue === undefined) {
       validationErrors[property] = `${property} is required.`
@@ -37,6 +41,15 @@ export function validateSchema(schema, data) {
       continue
     }
 
+    if (
+      propertyValue !== undefined &&
+      Array.isArray(schemaFields[property].enum) &&
+      !schemaFields[property].enum.includes(propertyValue)
+    ) {
+      validationErrors[property] = `${property} has an invalid value.`
+      continue
+    }
+
     if (propertyValue !== undefined) {
       validData[property] = propertyValue
     }
@@ -46,7 +59,7 @@ export function validateSchema(schema, data) {
     return {
       success: false,
       errors: validationErrors,
-      formattedError: extractErrors(validationErrors)
+      formattedError: extractErrors(validationErrors),
     }
   }
 

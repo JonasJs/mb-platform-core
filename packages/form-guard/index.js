@@ -1,7 +1,4 @@
-import { validateSchema } from "./src/guard-schema.js";
-import { extractFieldErrors } from "./src/extract-errors.js";
+import { validateSchema } from './src/guard-schema.js'
+import { extractErrors } from './src/extract-errors.js'
 
-export {
-  validateSchema,
-  extractFieldErrors,
-}
+export { validateSchema, extractErrors }
