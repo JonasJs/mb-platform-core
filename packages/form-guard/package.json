@@ -1,0 +1,13 @@
+{
+  "name": "@mb-platform/form-guard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "eslint:format": "eslint src --fix",
+    "prettier:format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@mb-platform/eslint-config": "^1.0.0"
+  }
+}
