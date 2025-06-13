@@ -1,6 +1,7 @@
 import path from 'path'
 import express, { Router } from 'express'
 import { createProxyMiddleware } from 'http-proxy-middleware'
+import { CreateUserController } from '../modules/registration/useCases/CreateUser/CreateUserController.js'
 
 const registrationRoutes = Router()
 const authFrontDist = path.resolve(
@@ -9,10 +10,13 @@ const authFrontDist = path.resolve(
 )
 const isProd = process.env.NODE_ENV === 'production'
 
-registrationRoutes.post('/check', (_req, res) => {
-  res.json({ message: 'registration check' })
-})
+// Controllers
+const createUserController = new CreateUserController()
 
+// Routes
+registrationRoutes.post('/', createUserController.handle)
+
+// Front routes
 if (isProd) {
   registrationRoutes.use(express.static(authFrontDist))
   registrationRoutes.get('/', (_req, res) => {

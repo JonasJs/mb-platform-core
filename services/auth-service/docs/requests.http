@@ -1,0 +1,15 @@
+# Details
+## Install plugin [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+# Environment Switching
+@baseUrl = {{$dotenv BASE_URL}}
+
+POST {{baseUrl}}/registration
+Content-Type: application/json
+
+{
+  "email": "jonas@gmail.com",
+  "personType": "company",
+  "phone": "123456789",
+  "password": "123456"
+}
