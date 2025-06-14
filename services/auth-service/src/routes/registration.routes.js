@@ -1,7 +1,9 @@
 import path from 'path'
 import express, { Router } from 'express'
 import { createProxyMiddleware } from 'http-proxy-middleware'
-import { CreateUserController } from '../modules/registration/useCases/CreateUser/CreateUserController.js'
+
+// eslint-disable-next-line @stylistic/max-len
+import { CreateUserController } from '@modules/registration/useCases/CreateUser/CreateUserController'
 
 const registrationRoutes = Router()
 const authFrontDist = path.resolve(

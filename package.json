@@ -8,12 +8,13 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm-run-all --parallel dev:auth-front dev:auth-service",
+    "dev": "npm-run-all --parallel build:design-system dev:auth-front dev:auth-service",
     "dev:auth-front": "npm run dev --workspace=apps/auth-front",
     "dev:auth-service": "npm run dev --workspace=services/auth-service",
     "build": "npm run build --workspaces --if-present",
+    "build:design-system": "npm run build --workspace=packages/design-system",
     "prepare": "husky install",
-    "lint": "npm run eslint:format --workspaces --if-present",
+    "lint": "npm run eslint:format --workspaces --if-present -- --max-warnings=0",
     "format": "npm run prettier:format --workspaces --if-present",
     "eslint:format": "npm run eslint:format --workspaces --if-present",
     "prettier:format": "npm run prettier:format --workspaces --if-present"
