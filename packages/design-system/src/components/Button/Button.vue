@@ -1,6 +1,6 @@
 <template>
   <button :class="buttonClass" @click="emitClick">
-    {{ label }}
+    <slot></slot>
   </button>
 </template>
 
@@ -25,4 +25,9 @@ const emitClick = () => emit("click");
 const buttonClass = computed(() => [props.primary ? "mb-bg-primary" : ""]);
 </script>
 
-<style scoped></style>
+<style scoped>
+.mb-bg-primary {
+  background-color: var(--color-primary);
+}
+
+</style>
