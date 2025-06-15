@@ -10,7 +10,7 @@
 
 <!---
 Example:
-- `https://devjonas.atlassian.net/browse/AQF-1`
+- `https://devjonas.atlassian.net/browse/MB-1`
 --->
 
 #### Type of Change

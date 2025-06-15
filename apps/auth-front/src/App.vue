@@ -42,7 +42,16 @@
         label-next-button="Finalizar"
         label-back-button="Voltar"
       >
-        <div>Step 3</div>
+        <div>
+          <p>{{ name }}</p>
+          <Input
+          v-model="name"
+          label="Nome"
+          placeholder="Digite seu nome"
+          type="text"
+          error="Campo obrigatório"
+        />
+        </div>
       </Step>
     </Stepper>
   </header>
@@ -50,9 +59,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Stepper, Step, RadioButton } from '@mb-platform/design-system';
+import { Stepper, Step, RadioButton, Input } from '@mb-platform/design-system';
 
 const selectedOption = ref(null);
+const name = ref(null);
 
 </script>
 

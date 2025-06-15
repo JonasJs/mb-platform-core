@@ -1,8 +1,9 @@
 :root {
   --primary-color: #f90;
 
-  --gray-800: #1f2937;
   --gray-400: #9ca3af;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
 
   --text-color: var(--gray-800);
 
