@@ -1,5 +1,5 @@
 <template>
-  <Stepper>
+  <Stepper v-model="currentStep">
     <WellcomeStep title="Seja bem vindo(a)" :form-data="formData" @form-submitted="handleSubmitWellcomeStep" />
   </Stepper>
 </template>
@@ -9,6 +9,9 @@ import { reactive } from 'vue'
 import { Stepper } from '@mb-platform/design-system'
 import WellcomeStep from './Steps/WellcomeStep.vue'
 import { PERSON_TYPE_ENUM } from './RegistrationForm.utils.js'
+
+
+const currentStep = 1;
 
 const formData = reactive({
   email: undefined,
