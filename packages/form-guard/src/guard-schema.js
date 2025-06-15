@@ -1,4 +1,5 @@
 import { extractErrors } from './extract-errors.js'
+import { buildValidations } from './validations/build-validations.js'
 
 function isObject(obj) {
   return obj !== null && typeof obj === 'object'
@@ -20,13 +21,13 @@ export function validateSchema({ schema, data }) {
   const validationErrors = {}
 
   for (const property in schemaFields) {
-    const schemaPropertyType =
-      schemaFields[property]?.type ?? schemaFields[property]
+    const field = schemaFields[property]
+    const schemaPropertyType = field?.type ?? field
     const propertyValue = data[property]
 
-    const hasParamRequired =
-      typeof schemaFields[property]?.required === 'boolean'
-    const isRequired = hasParamRequired && schemaFields[property].required
+    const hasParamRequired = typeof field?.required === 'boolean'
+
+    const isRequired = hasParamRequired && field.required
 
     if (isRequired && propertyValue === undefined) {
       validationErrors[property] = `${property} is required.`
@@ -43,11 +44,38 @@ export function validateSchema({ schema, data }) {
 
     if (
       propertyValue !== undefined &&
-      Array.isArray(schemaFields[property].enum) &&
-      !schemaFields[property].enum.includes(propertyValue)
+      Array.isArray(field.enum) &&
+      !field.enum.includes(propertyValue)
     ) {
       validationErrors[property] = `${property} has an invalid value.`
       continue
+    }
+
+    if (propertyValue !== undefined && field?.validation?.validate) {
+      const validationsData = buildValidations()
+      const validatorKey = field.validation.validate
+
+      let validationIsValid = true
+
+      const isValidatorFn = typeof validatorKey === 'function'
+      if (isValidatorFn) {
+        validationIsValid = validatorKey(propertyValue)
+      }
+
+      if (typeof validatorKey === 'string') {
+        if (!validationsData[validatorKey]) {
+          throw new Error(
+            `${property} has an unknown validator: "${validatorKey}".`
+          )
+        }
+        validationIsValid = validationsData[validatorKey](propertyValue)
+      }
+
+      if (!validationIsValid) {
+        validationErrors[property] =
+          field.validation?.message ?? `${property} failed validation`
+        continue
+      }
     }
 
     if (propertyValue !== undefined) {

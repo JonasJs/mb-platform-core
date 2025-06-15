@@ -23,6 +23,9 @@
           label="Pessoa jurídica"
         />
       </div>
+      <span v-if="errors.personType" class="error-message">
+        {{ errors.personType }}
+      </span>
     </div>
   </Step>
 </template>
@@ -32,12 +35,12 @@ import {ref} from 'vue'
 import { Step, RadioButton, Input } from '@mb-platform/design-system'
 import { validateSchema } from '@mb-platform/form-guard'
 import { PERSON_TYPE_ENUM } from '../RegistrationForm.utils.js'
-import {welcomeSchema} from './Step.schema.js'
+import { welcomeSchema } from './Step.schema.js'
 
 const props = defineProps({
   formData: {
     type: Object,
-    required: true
+    required: true,
   },
   title: {
     type: String,
@@ -46,7 +49,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['form-submitted']);
-
 const errors = ref({})
 
 function handleSubmit() {
@@ -58,12 +60,12 @@ function handleSubmit() {
     }
   })
 
-  console.log(validation)
   if (!validation.success) {
     errors.value = validation.errors
     return;
   }
 
+  errors.value = {}
   return emit('form-submitted')
 }
 
@@ -79,5 +81,11 @@ function handleSubmit() {
 .radio-group {
   display: flex;
   justify-content: space-between;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: var(--font-14);
+  font-weight: var(--font-weight-regular);
 }
 </style>
