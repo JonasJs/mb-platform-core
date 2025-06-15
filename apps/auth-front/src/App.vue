@@ -7,8 +7,31 @@
         label-next-button="Próximo"
       >
         <div>
-         Step 0
+          <p>Selecionado: {{ selectedOption }}</p>
+         <div>
+          <RadioButton
+            v-model="selectedOption"
+            name="options"
+            value="opcao1"
+            label="Primeira Opção"
+          />
+
+          <RadioButton
+            v-model="selectedOption"
+            name="options"
+            value="opcao2"
+            label="Segunda Opção"
+          />
+
+          <RadioButton
+            v-model="selectedOption"
+            name="options"
+            value="opcao3"
+            label="Terceira Opção"
+          />
+         </div>
         </div>
+
       </Step>
 
 
@@ -26,7 +49,11 @@
 </template>
 
 <script setup>
-import { Stepper, Step } from '@mb-platform/design-system';
+import { ref } from 'vue';
+import { Stepper, Step, RadioButton } from '@mb-platform/design-system';
+
+const selectedOption = ref(null);
+
 </script>
 
 <style scoped>

@@ -1,7 +1,13 @@
 :root {
   --primary-color: #f90;
-  --text-color: #1f2937;
+
+  --gray-800: #1f2937;
+  --gray-400: #9ca3af;
+
+  --text-color: var(--gray-800);
+
   --error-color: #d33367;
+
   --background-color: #f9fafb;
 
   --font-14: 0.875rem;
@@ -10,7 +16,9 @@
   --font-32: 2rem;
 
   --font-weight-regular: 400;
+  --font-weight-medium: 500;
   --font-weight-bold: 700;
 
+  --spacing-4: 4px;
   --spacing-8: 8px;
 }
