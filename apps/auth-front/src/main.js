@@ -1,5 +1,7 @@
 import '@mb-platform/design-system/styles'
 
+import './global.css'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 

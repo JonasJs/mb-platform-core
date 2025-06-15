@@ -1,25 +1,27 @@
 <template>
-  <Steps
-    :steps="stepsData"
-    :currentStep="currentStep"
-  />
-  <Transition
-    name="fade"
-    mode="out-in"
-  >
-    <div :key="currentStep">
-      <component
-        :is="currentComponent"
-        v-bind="currentProps"
-        @next="handleNext"
-        @back="handleBack"
-      />
-    </div>
-  </Transition>
+  <div class="stepper">
+    <Steps
+      :steps="stepsData"
+      :currentStep="currentStep"
+    />
+    <Transition
+      name="fade"
+      mode="out-in"
+    >
+      <div :key="currentStep">
+        <component
+          :is="currentComponent"
+          v-bind="currentProps"
+          @next="handleNext"
+          @back="handleBack"
+        />
+      </div>
+    </Transition>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, useSlots } from 'vue';
+import { ref, computed, useSlots, watch } from 'vue';
 import Steps from '../Steps/Steps.vue';
 
 const props = defineProps({
@@ -27,6 +29,8 @@ const props = defineProps({
     default: 0
   }
 });
+
+const emit = defineEmits(['update:modelValue']);
 
 const slots = useSlots();
 
@@ -36,6 +40,11 @@ const currentNode = computed(() => slotSteps.value[currentStep.value]);
 const currentComponent = computed(() => currentNode.value);
 
 const currentStep = ref(props.modelValue);
+
+watch(() => props.modelValue, (newValue) => {
+  currentStep.value = newValue;
+  emit('update:modelValue', newValue);
+});
 
 function currentProps() {
   return currentNode.value?.props || {};
@@ -59,6 +68,13 @@ function handleBack(){
 </script>
 
 <style scoped>
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;

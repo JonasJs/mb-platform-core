@@ -51,7 +51,6 @@ const props = defineProps({
 
 const emit = defineEmits(['next', 'back']);
 
-
 function handleNext(){
   return Promise.resolve().then(props.nextAction).then(() => emit('next'));
 };
