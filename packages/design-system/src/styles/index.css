@@ -2,6 +2,7 @@
 
 @import "./variables.css";
 @import "./utilities/background.css";
+@import "./utilities/typography.css";
 
 *,
 *::before,

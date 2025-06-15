@@ -1,0 +1,13 @@
+.heading-large {
+  font-size: var(--font-32);
+  font-weight: var(--font-weight-bold);
+}
+
+.paragraph-medium {
+  font-size: var(--font-16);
+  font-weight: var(--font-weight-regular);
+}
+
+.text-primary-color {
+  color: var(--primary-color);
+}
