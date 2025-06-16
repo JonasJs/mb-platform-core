@@ -14,6 +14,7 @@
         type="text"
         placeholder="Digite seu CNPJ"
         :error="errors.cnpj"
+        :mask="maskCNPJ"
       />
       <Input
         v-model="formData.openingDate"
@@ -21,6 +22,7 @@
         type="text"
         placeholder="Digite sua data de abertura"
         :error="errors.openingDate"
+        :mask="maskDate"
       />
     </div>
   </Step>
@@ -31,6 +33,7 @@ import { ref } from 'vue'
 import { Step, Input } from '@mb-platform/design-system'
 import { validateSchema } from '@mb-platform/form-guard'
 import { companyStepSchema } from './Step.schema.js'
+import { maskDate, maskCNPJ } from "@/utils/masks";
 
 const props = defineProps({
   formData: {

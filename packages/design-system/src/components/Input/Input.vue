@@ -45,7 +45,11 @@ const props = defineProps({
   error: {
     type: String,
     default: ''
-  }
+  },
+  mask: {
+    type: Function,
+    default: null,
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -66,6 +70,13 @@ const inputClass = computed(() => [
 ]);
 
 function onInput(event) {
+  let value = event.target.value;
+
+  if(typeof props.mask === 'function') {
+    value = props.mask(value);
+  }
+
+  event.target.value = value;
   emit('update:modelValue', event.target.value)
 }
 </script>
