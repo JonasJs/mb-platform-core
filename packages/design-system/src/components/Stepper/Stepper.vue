@@ -72,7 +72,7 @@ function handleBack(){
 .stepper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-32);
+  gap: var(--spacing-24);
 }
 
 .fade-enter-active,

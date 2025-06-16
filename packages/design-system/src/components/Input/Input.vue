@@ -1,15 +1,16 @@
 <template>
   <div class="container">
-    <label v-if="label" class="label paragraph-medium text-semi-bold">
+    <label v-if="label" :for="inputId" class="label paragraph-medium text-semi-bold">
       {{ label }}
     </label>
-    <input 
+    <input
+      :id="inputId"
       :type="type"
       :placeholder="placeholder"
       :value="modelValue"
       :disabled="disabled"
       :class="inputClass"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="onInput"
     >
     <span v-if="error" class="error-message">
       {{ error }}
@@ -49,6 +50,13 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
+const inputId = computed(() => {
+  if(props.label) {
+    return `input-${props.label.toLowerCase().replace(/\s+/g, '-')}`;
+  }
+  return `input-${Date.now()}`;
+})
+
 const inputClass = computed(() => [
   'input-field',
   {
@@ -56,6 +64,10 @@ const inputClass = computed(() => [
     'input-disabled': props.disabled
   }
 ]);
+
+function onInput(event) {
+  emit('update:modelValue', event.target.value)
+}
 </script>
 
 <style scoped>

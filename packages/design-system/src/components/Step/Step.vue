@@ -51,11 +51,18 @@ const props = defineProps({
 
 const emit = defineEmits(['next', 'back']);
 
-function handleNext(){
-  return Promise.resolve().then(props.nextAction).then(() => emit('next'));
-};
+async function handleNext() {
+  try {
+    await props.nextAction();
+    emit('next');
+  } catch {}
+}
 
-function handleBack() {
-  return Promise.resolve().then(props.backAction).then(() => emit('back'));
-};
+
+async function handleBack() {
+  try {
+    await props.backAction();
+    emit('back');
+  } catch {}
+}
 </script>
