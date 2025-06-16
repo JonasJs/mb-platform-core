@@ -1,5 +1,8 @@
 <template>
-  <Step :title={title} :next-action="handleSubmit" label-next-button="Continuar">
+  <Step
+    :title={title}
+    :next-action="handleSubmit"
+    label-next-button="Continuar">
     <div class="form-content">
       <Input
         v-model="formData.email"
@@ -31,7 +34,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { Step, RadioButton, Input } from '@mb-platform/design-system'
 import { validateSchema } from '@mb-platform/form-guard'
 import { PERSON_TYPE_ENUM } from '../RegistrationForm.utils.js'
@@ -62,13 +65,13 @@ function handleSubmit() {
 
   if (!validation.success) {
     errors.value = validation.errors
-    return;
+    return Promise.reject(new Error('Validation failed'))
   }
 
   errors.value = {}
-  return emit('form-submitted')
-}
 
+  return Promise.resolve(() => emit('form-submitted'))
+}
 </script>
 
 <style scoped>
