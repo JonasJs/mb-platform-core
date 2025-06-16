@@ -54,7 +54,6 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['form-submitted']);
 const errors = ref({})
 
 function handleSubmit() {
@@ -74,7 +73,7 @@ function handleSubmit() {
   }
 
   errors.value = {}
-  return Promise.resolve(() => emit('form-submitted'))
+  return Promise.resolve()
 }
 
 </script>
