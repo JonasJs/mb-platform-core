@@ -14,6 +14,7 @@
         type="text"
         placeholder="Digite seu CPF"
         :error="errors.cpf"
+        :mask="maskCPF"
       />
       <Input
         v-model="formData.birthDate"
@@ -21,6 +22,7 @@
         type="text"
         placeholder="Digite sua data de nascimento"
         :error="errors.birthDate"
+        :mask="maskDate"
       />
       <Input
         v-model="formData.phone"
@@ -28,6 +30,7 @@
         type="text"
         placeholder="Digite seu telefone"
         :error="errors.phone"
+        :mask="maskPhone"
       />
     </div>
   </Step>
@@ -38,6 +41,7 @@ import { ref } from 'vue'
 import { Step, Input } from '@mb-platform/design-system'
 import { validateSchema } from '@mb-platform/form-guard'
 import { individualStepSchema } from './Step.schema.js'
+import { maskCPF, maskPhone, maskDate } from "@/utils/masks";
 
 const props = defineProps({
   formData: {
