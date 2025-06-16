@@ -86,3 +86,16 @@ export const companyStepSchema = {
     },
   },
 }
+
+export const passwordStepSchema = {
+  fields: {
+    password: {
+      type: 'string',
+      required: true,
+      validation: {
+        validate: VALIDATIONS_ENUM.IS_NOT_EMPTY,
+        message: 'Senha obrigatória!',
+      },
+    },
+  },
+}

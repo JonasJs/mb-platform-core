@@ -65,7 +65,6 @@ const inputClass = computed(() => [
   'input-field',
   {
     'input-error': props.error,
-    'input-disabled': props.disabled
   }
 ]);
 
@@ -116,7 +115,7 @@ function onInput(event) {
 .input-field:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background-color: var(--gray-400);
+  background-color: var(--gray-300);
 }
 
 .input-error {
