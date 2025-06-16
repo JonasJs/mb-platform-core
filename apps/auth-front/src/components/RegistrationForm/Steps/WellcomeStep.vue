@@ -70,7 +70,7 @@ function handleSubmit() {
 
   errors.value = {}
 
-  return Promise.resolve(() => emit('form-submitted'))
+  return Promise.resolve()
 }
 </script>
 

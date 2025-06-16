@@ -15,7 +15,7 @@ export class CreateUserController {
     })
 
     if (!validateResult.success) {
-      throw new AppError('Invalid fields', 400, validateResult?.formattedError)
+      throw new AppError('Invalid fields', 400, validateResult?.errors)
     }
 
     const createUserUseCase = new CreateUserUseCase()

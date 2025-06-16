@@ -2,8 +2,9 @@
   <Step
     :title={title}
     label-next-button="Continuar"
-    label-back-button="Voltar">
-
+    label-back-button="Voltar"
+    :next-action="handleSubmit"
+    >
     <div class="form-content">
       <Input
         v-model="formData.email"
@@ -103,6 +104,12 @@ const props = defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['form-submitted']);
+
+function handleSubmit() {
+  emit('form-submitted');
+}
 
 </script>
 
