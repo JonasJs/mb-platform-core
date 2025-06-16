@@ -1,10 +1,11 @@
 <template>
-  <label class="radio">
-    <input 
+  <label class="radio" :class="{'radio-disabled': disabled }">
+    <input
       :name="name" 
       type="radio" 
       :value="value" 
       :checked="modelValue === value"
+      :disabled="disabled"
       @change="$emit('update:modelValue', value)"
     >
     <span class="paragraph-medium text-semi-bold">{{ label }}</span>
@@ -28,6 +29,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
     default: null
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -35,12 +40,16 @@ const emit = defineEmits(['update:modelValue']);
 </script>
 
 <style scoped>
-
 .radio {
   --radio-size: 16px;
   cursor: pointer; 
   user-select: none;
   text-align: left;
+}
+
+.radio-disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .radio input {
@@ -70,6 +79,11 @@ const emit = defineEmits(['update:modelValue']);
   background: var(--background-color);
 }
 
+.radio--disabled input + span:before {
+  border-color: var(--gray-300);
+  background: var(--gray-100);
+}
+
 .radio input + span:after {
   content: '';
   width: calc(var(--radio-size) - 6px);
@@ -92,5 +106,9 @@ const emit = defineEmits(['update:modelValue']);
 .radio input:checked + span:after {
   opacity: 1;
   transform: scale(1,1);
+}
+
+.radio--disabled input:checked + span:after {
+  background: var(--gray-400);
 }
 </style>

@@ -8,25 +8,21 @@
         <Button
           :disabled="disableBackButton"
           @click="handleBack"
+          secondary
         >
           {{ labelBackButton }}
         </Button>
       </slot>
 
-      <div class="footer-content">
-        <slot name="footer-content"></slot>
-      </div>
+      <slot name="right-button" v-if="labelNextButton" :next="handleNext">
+        <Button
+          :disabled="disableNextButton"
+          @click="handleNext"
+        >
+          {{ labelNextButton }}
+        </Button>
+      </slot>
 
-      <div class="right-button" v-if="labelNextButton">
-        <slot name="right-button" :next="handleNext">
-          <Button
-            :disabled="disableNextButton"
-            @click="handleNext"
-          >
-            {{ labelNextButton }}
-          </Button>
-        </slot>
-      </div>
     </div>
   </div>
 </template>
@@ -66,3 +62,19 @@ async function handleBack() {
   } catch {}
 }
 </script>
+
+<style scoped>
+.step-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-24);
+
+  gap: var(--spacing-32);
+}
+
+.step-buttons button {
+  flex: 1;
+}
+
+</style>

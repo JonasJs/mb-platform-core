@@ -78,6 +78,7 @@ function handleSubmit() {
 }
 
 </script>
+
 <style scoped>
 .form-content {
   display: flex;
