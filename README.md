@@ -44,6 +44,12 @@ npm install
 npm run dev
 ```
 
+4. Executar os testes
+
+```bash
+npm run dev
+```
+
 ---
 
 ## 🛠 Tecnologias e Ferramentas

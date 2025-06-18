@@ -47,7 +47,9 @@ const hasCompany = computed(() => {
 
 async function handleSubmitForm() {
   try {
-    const baseUrl = `${import.meta.env.VITE_API_URL}/registration`
+    // TEMP
+    const url = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+    const baseUrl = `${url}/registration`
 
     const response = await fetch(baseUrl, {
       method: 'POST',

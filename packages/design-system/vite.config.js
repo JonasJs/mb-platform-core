@@ -19,4 +19,19 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['**/*.test.{js,jsx}', '**/*.unit.test.{js,jsx}'],
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      reportsDirectory: './coverage',
+      include: ['src/**/*.vue', 'src/**/*.js'],
+      exclude: ['node_modules/', 'tests/', '**/*.test.*'],
+      lines: 80,
+      functions: 80,
+      branches: 80,
+      statements: 80,
+    },
+  },
 })
