@@ -1,5 +1,5 @@
 import { validateSchema } from '@mb-platform/form-guard'
-import { CreateUserUseCase } from './CreateUserUseCase.js'
+import { createUserFactory } from './CreateUserFactory.js'
 import { AppError } from '../../../../errors/app-error.js'
 import { buildCreateUserSchema } from './CreateUser.schema.js'
 
@@ -18,7 +18,7 @@ export class CreateUserController {
       throw new AppError('Invalid fields', 400, validateResult?.errors)
     }
 
-    const createUserUseCase = new CreateUserUseCase()
+    const createUserUseCase = createUserFactory()
 
     const result = await createUserUseCase.execute(payload)
 

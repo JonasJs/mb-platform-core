@@ -10,12 +10,13 @@
       title="Revise suas informações"
       :form-data="formData"
       @form-submitted="handleSubmitForm"
+      :isLoading="isLoading"
     />
   </Stepper>
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { Stepper } from '@mb-platform/design-system'
 import { PERSON_TYPE_ENUM } from './RegistrationForm.utils.js'
 
@@ -41,12 +42,15 @@ const formData = reactive({
   password: '',
 })
 
+const isLoading = ref(false)
+
 const hasCompany = computed(() => {
   return formData.personType === PERSON_TYPE_ENUM.COMPANY
 })
 
 async function handleSubmitForm() {
   try {
+    isLoading.value = true
     // TEMP
     const url = import.meta.env.VITE_API_URL || 'http://localhost:3001'
     const baseUrl = `${url}/registration`
@@ -61,9 +65,12 @@ async function handleSubmitForm() {
 
     if (!response.ok) throw new Error('Erro ao enviar o formulário')
 
-    await response.json()
+    await response.json();
+
   } catch (error) {
-    console.log(error)
+    alert("Erro ao enviar o formulário")
+  } finally {
+    isLoading.value = false
   }
 }
 </script>

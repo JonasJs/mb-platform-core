@@ -102,6 +102,10 @@ const props = defineProps({
   title: {
     type: String,
     required: true
+  },
+  isLoading: {
+    type: Boolean,
+    required: false
   }
 })
 
