@@ -19,7 +19,8 @@
     "lint": "npm run eslint:format --workspaces --if-present -- --max-warnings=0",
     "format": "npm run prettier:format --workspaces --if-present",
     "eslint:format": "npm run eslint:format --workspaces --if-present",
-    "prettier:format": "npm run prettier:format --workspaces --if-present"
+    "prettier:format": "npm run prettier:format --workspaces --if-present",
+    "storybook": "npm run storybook --workspace=packages/design-system"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [

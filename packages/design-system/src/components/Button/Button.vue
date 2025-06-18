@@ -1,5 +1,5 @@
 <template>
-  <button :class="buttonClass" @click="emitClick">
+  <button :class="buttonClass" @click="handleClick">
     <slot></slot>
   </button>
 </template>
@@ -19,32 +19,34 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["click"]);
-const emitClick = () => emit("click");
+
+function handleClick() {
+  emit("click");
+}
 
 const buttonClass = computed(() => {
   if (props.secondary) {
-    return [{ "mb-secondary": props.secondary }]
+    return [{ "mb-secondary": props.secondary }];
   }
-  return [{ "mb-primary": true }];;
+  return [{ "mb-primary": true }];
 });
-
 </script>
 
 <style scoped>
 button {
   padding: var(--spacing-8) var(--spacing-32);
-  
+
   border: none;
   border-radius: var(--border-radius-8);
-  
+
   font-size: var(--font-16);
   font-weight: var(--font-weight-medium);
-  
+
   color: var(--gray-50);
   cursor: pointer;
 }
 
-.mb-primary{
+.mb-primary {
   background: var(--primary-color);
 }
 

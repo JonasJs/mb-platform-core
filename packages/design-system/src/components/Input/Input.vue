@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <label v-if="label" :for="inputId" class="label paragraph-medium text-semi-bold">
+    <label
+      v-if="label"
+      :for="inputId"
+      class="label paragraph-medium text-semi-bold"
+    >
       {{ label }}
     </label>
     <input
@@ -11,7 +15,7 @@
       :disabled="disabled"
       :class="inputClass"
       @input="onInput"
-    >
+    />
     <span v-if="error" class="error-message">
       {{ error }}
     </span>
@@ -19,32 +23,32 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps({
   label: {
     type: String,
-    default: ''
+    default: "",
   },
   type: {
     type: String,
-    default: 'text'
+    default: "text",
   },
   placeholder: {
     type: String,
-    default: ''
+    default: "",
   },
   modelValue: {
     type: [String, Number],
-    default: ''
+    default: "",
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   error: {
     type: String,
-    default: ''
+    default: "",
   },
   mask: {
     type: Function,
@@ -52,37 +56,38 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const inputId = computed(() => {
-  if(props.label) {
-    return `input-${props.label.toLowerCase().replace(/\s+/g, '-')}`;
+  if (props.label) {
+    return `input-${props.label.toLowerCase().replace(/\s+/g, "-")}`;
   }
   return `input-${Date.now()}`;
-})
+});
 
 const inputClass = computed(() => [
-  'input-field',
+  "input-field",
   {
-    'input-error': props.error,
-  }
+    "input-error": props.error,
+  },
 ]);
 
 function onInput(event) {
   let value = event.target.value;
 
-  if(typeof props.mask === 'function') {
+  if (typeof props.mask === "function") {
     value = props.mask(value);
   }
 
   event.target.value = value;
-  emit('update:modelValue', event.target.value)
+  emit("update:modelValue", event.target.value);
 }
 </script>
 
 <style scoped>
 .container {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   gap: var(--spacing-4);
 }
@@ -94,15 +99,16 @@ function onInput(event) {
 }
 
 .input-field {
+  width: 100%;
   padding: var(--spacing-8);
-  
+
   border: 1px solid var(--gray-400);
   border-radius: 4px;
 
   font-size: var(--font-16);
   font-weight: var(--font-weight-regular);
   color: var(--text-color);
-  
+
   background-color: var(--background-color);
   transition: border-color 0.2s ease;
 }
@@ -130,5 +136,5 @@ function onInput(event) {
   color: var(--error-color);
   font-size: var(--font-14);
   font-weight: var(--font-weight-regular);
-} 
+}
 </style>

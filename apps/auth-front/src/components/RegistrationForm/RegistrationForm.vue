@@ -1,13 +1,16 @@
 <template>
-  <Stepper v-model="currentStep">
+  <Stepper>
     <WellcomeStep title="Seja bem vindo(a)" :form-data="formData" />
 
     <CompanyStep v-if="hasCompany" title="Pessoa Jurídica" :form-data="formData" />
     <IndividualStep v-else title="Pessoa Física" :form-data="formData" />
 
     <PasswordStep title="Senha de acesso" :form-data="formData" />
-    <ReviewFormStep title="Revise suas informações" :form-data="formData" @form-submitted="handleSubmitForm"/>
-
+    <ReviewFormStep
+      title="Revise suas informações"
+      :form-data="formData"
+      @form-submitted="handleSubmitForm"
+    />
   </Stepper>
 </template>
 
@@ -21,8 +24,6 @@ import IndividualStep from './Steps/IndividualStep.vue'
 import CompanyStep from './Steps/CompanyStep.vue'
 import PasswordStep from './Steps/PasswordStep.vue'
 import ReviewFormStep from './Steps/ReviewFormStep.vue'
-
-const currentStep = 3;
 
 const formData = reactive({
   email: '',
@@ -54,16 +55,13 @@ async function handleSubmitForm() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-    });
+    })
 
-    if (!response.ok) throw new Error('Erro ao enviar o formulário');
+    if (!response.ok) throw new Error('Erro ao enviar o formulário')
 
-    await response.json();
-
+    await response.json()
   } catch (error) {
     console.log(error)
   }
 }
-
-
 </script>
