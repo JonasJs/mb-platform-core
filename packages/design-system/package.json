@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
-    "@storybook/addon-docs": "^9.0.9",
     "@storybook/addon-onboarding": "^9.0.9",
     "@storybook/vue3-vite": "^9.0.9",
     "@vitejs/plugin-vue": "^5.2.4",

@@ -1,31 +1,50 @@
-import MyButton from './Button.vue'
+import Button from './Button.vue'
 
 export default {
-  title: 'Example/MyButton',
-  component: MyButton,
+  title: 'Components/Button',
+  component: Button,
   argTypes: {
-    label: { control: 'text' },
-    primary: { control: 'boolean' },
-    click: { action: 'clicked' },
+    primary: {
+      control: 'boolean',
+    },
+    secondary: {
+      control: 'boolean',
+    },
   },
 }
 
 const Template = (args) => ({
-  components: { MyButton },
+  components: {
+    Button,
+  },
   setup() {
     return { args }
   },
-  template: '<MyButton v-bind="args" @click="args.click" />',
+  template:
+    '<Button v-bind="args" @click="onClick">{{ args.label || "Button" }}</Button>',
+  methods: {
+    onClick() {
+      console.log('Button clicked!')
+    },
+  },
 })
 
+export const Default = Template.bind({})
+Default.args = {
+  label: 'Default Button',
+}
+
 export const Primary = Template.bind({})
+
 Primary.args = {
-  label: 'Primary Button',
   primary: true,
+  secondary: false,
+  label: 'Primary Button',
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
-  label: 'Secondary Button',
   primary: false,
+  secondary: true,
+  label: 'Secondary Button',
 }

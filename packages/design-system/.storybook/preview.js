@@ -11,7 +11,7 @@ export const decorators = [
   (story) => ({
     components: { Story: story() },
     template: `
-      <div class="container">
+      <div class="container-preview">
         <Story />
       </div>
     `,
