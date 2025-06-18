@@ -67,14 +67,25 @@ describe('ReviewFormStep', () => {
     expect(inputs.length).toBe(1)
   })
 
-  it('should emit "form-submitted" when next action is called', async () => {
+  it('should emit "form-submitted" when next action is called and return a Promise', async () => {
     const wrapper = shallowMountComponent()
 
     const step = wrapper.findComponent(Step)
     const nextAction = step.props().nextAction
 
-    await nextAction()
+    const promise = nextAction()
 
+    expect(promise).toBeInstanceOf(Promise)
     expect(wrapper.emitted('form-submitted')).toBeTruthy()
+
+    const emittedEvent = wrapper.emitted('form-submitted')[0][0]
+
+    expect(emittedEvent).toHaveProperty('resolve')
+    expect(emittedEvent).toHaveProperty('reject')
+    expect(typeof emittedEvent.resolve).toBe('function')
+    expect(typeof emittedEvent.reject).toBe('function')
+
+    emittedEvent.resolve()
+    await promise
   })
 })

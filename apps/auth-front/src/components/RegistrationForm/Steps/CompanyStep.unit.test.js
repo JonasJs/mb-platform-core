@@ -4,7 +4,7 @@ import { shallowMount } from '@vue/test-utils'
 import CompanyStep from './CompanyStep.vue'
 import { Input, Step } from '@mb-platform/design-system'
 import { validateSchema } from '@mb-platform/form-guard'
-import { maskCNPJ, maskDate } from '@/utils/masks'
+import { maskCNPJ, maskDate, maskPhone } from '@/utils/masks'
 
 vi.mock('@mb-platform/form-guard')
 vi.mock('@/utils/masks')
@@ -13,6 +13,7 @@ const COMPANY_MOCK = {
   companyName: 'Empresa Teste',
   cnpj: '12.345.678/0001-90',
   openingDate: '16/06/1999',
+  phone: '(21) 99999-9999',
 }
 
 function shallowMountComponent(props, global) {
@@ -52,12 +53,14 @@ describe('CompanyStep', () => {
     const wrapper = shallowMountComponent({ formData }, stups)
     const inputs = wrapper.findAllComponents(Input)
 
-    expect(inputs).toHaveLength(3)
+    expect(inputs).toHaveLength(4)
     expect(inputs[0].props().modelValue).toBe(formData.companyName)
     expect(inputs[1].props().mask).toBe(maskCNPJ)
     expect(inputs[1].props().modelValue).toBe(formData.cnpj)
     expect(inputs[2].props().mask).toBe(maskDate)
     expect(inputs[2].props().modelValue).toBe(formData.openingDate)
+    expect(inputs[3].props().mask).toBe(maskPhone)
+    expect(inputs[3].props().modelValue).toBe(formData.phone)
   })
 
   it('should show errors when fields are empty', async () => {

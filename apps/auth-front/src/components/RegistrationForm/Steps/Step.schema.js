@@ -84,6 +84,14 @@ export const companyStepSchema = {
         message: 'Data de abertura é obrigatória!',
       },
     },
+    phone: {
+      type: 'string',
+      required: true,
+      validation: {
+        validate: VALIDATIONS_ENUM.IS_NOT_EMPTY,
+        message: 'Telefone é obrigatório!',
+      },
+    },
   },
 }
 

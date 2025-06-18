@@ -24,6 +24,14 @@
         :error="errors.openingDate"
         :mask="maskDate"
       />
+      <Input
+        v-model="formData.phone"
+        label="Telefone"
+        type="text"
+        placeholder="Digite seu telefone"
+        :error="errors.phone"
+        :mask="maskPhone"
+      />
     </div>
   </Step>
 </template>
@@ -33,7 +41,7 @@ import { ref } from 'vue'
 import { Step, Input } from '@mb-platform/design-system'
 import { validateSchema } from '@mb-platform/form-guard'
 import { companyStepSchema } from './Step.schema.js'
-import { maskDate, maskCNPJ } from "@/utils/masks";
+import { maskDate, maskCNPJ, maskPhone } from "@/utils/masks";
 
 const props = defineProps({
   formData: {
@@ -55,6 +63,7 @@ function handleSubmit() {
       companyName: props.formData.companyName,
       cnpj: props.formData.cnpj,
       openingDate: props.formData.openingDate,
+      phone: props.formData.phone
     }
   })
 

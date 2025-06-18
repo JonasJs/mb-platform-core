@@ -1,5 +1,5 @@
 <template>
-  <Stepper>
+  <Stepper v-model="currentStep">
     <WellcomeStep title="Seja bem vindo(a)" :form-data="formData" />
 
     <CompanyStep v-if="hasCompany" title="Pessoa Jurídica" :form-data="formData" />
@@ -12,6 +12,7 @@
       @form-submitted="handleSubmitForm"
       :isLoading="isLoading"
     />
+    <SuccessStep title="Sucesso!" />
   </Stepper>
 </template>
 
@@ -25,6 +26,7 @@ import IndividualStep from './Steps/IndividualStep.vue'
 import CompanyStep from './Steps/CompanyStep.vue'
 import PasswordStep from './Steps/PasswordStep.vue'
 import ReviewFormStep from './Steps/ReviewFormStep.vue'
+import SuccessStep from './Steps/SuccessStep.vue'
 
 const formData = reactive({
   email: '',
@@ -43,12 +45,13 @@ const formData = reactive({
 })
 
 const isLoading = ref(false)
+const currentStep = ref(0)
 
 const hasCompany = computed(() => {
   return formData.personType === PERSON_TYPE_ENUM.COMPANY
 })
 
-async function handleSubmitForm() {
+async function handleSubmitForm({ resolve, reject }) {
   try {
     isLoading.value = true
     // TEMP
@@ -67,8 +70,11 @@ async function handleSubmitForm() {
 
     await response.json();
 
+    resolve();
+
   } catch (error) {
     alert("Erro ao enviar o formulário")
+    reject(error);
   } finally {
     isLoading.value = false
   }

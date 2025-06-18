@@ -1,9 +1,10 @@
 <template>
   <Step
-    :title={title}
-    label-next-button="Continuar"
+    :title="title"
+    label-next-button="Finalizar"
     label-back-button="Voltar"
     :next-action="handleSubmit"
+    :disable-next-button="isLoading"
     >
     <div class="form-content">
       <Input
@@ -83,10 +84,12 @@
         v-if="formData.password"
         v-model="formData.password"
         label="Sua senha"
-        type="text"
+        type="password"
         disabled
       />
     </div>
+
+    <p class="loading paragraph-medium" v-if="isLoading">Enviando...</p>
   </Step>
 </template>
 
@@ -111,10 +114,15 @@ const props = defineProps({
 
 const emit = defineEmits(['form-submitted']);
 
-function handleSubmit() {
-  emit('form-submitted');
+async function handleSubmit() {
+  try {
+    return new Promise((resolve, reject) => {
+      emit('form-submitted', { resolve, reject });
+    });
+  } catch (error) {
+    throw error;
+  }
 }
-
 </script>
 
 <style scoped>
@@ -123,8 +131,14 @@ function handleSubmit() {
   flex-direction: column;
   gap: var(--spacing-16);
 }
+
 .radio-group {
   display: flex;
   justify-content: space-between;
+}
+
+.loading {
+  margin-top: var(--spacing-16);
+  color: var(--green-600)
 }
 </style>

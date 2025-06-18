@@ -90,6 +90,7 @@ describe('StepSchemas', () => {
         expect(result.errors.companyName).toBe('companyName is required.')
         expect(result.errors.cnpj).toBe('cnpj is required.')
         expect(result.errors.openingDate).toBe('openingDate is required.')
+        expect(result.errors.phone).toBe('phone is required.')
       })
 
       it('should show sucess with valid data', () => {
@@ -97,6 +98,7 @@ describe('StepSchemas', () => {
           companyName: 'Empresa Ltda',
           cnpj: '12.345.678/0001-99',
           openingDate: '16/06/1999',
+          phone: '(21) 99999-9999',
         }
         const result = validateSchema({
           schema: companyStepSchema,
