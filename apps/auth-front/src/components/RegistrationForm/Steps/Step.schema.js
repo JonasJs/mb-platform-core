@@ -1,5 +1,5 @@
-import { PERSON_TYPE_ENUM } from '../RegistrationForm.utils.js'
 import { validations, VALIDATIONS_ENUM } from '@mb-platform/form-guard'
+import { PERSON_TYPE_ENUM } from '../RegistrationForm.utils.js'
 
 export const welcomeSchema = {
   fields: {
@@ -8,7 +8,7 @@ export const welcomeSchema = {
       required: true,
       validation: {
         validate: (value) => {
-          return validations.isNotEmpty && validations.isValidEmail(value)
+          return validations.isNotEmpty(value) && validations.isValidEmail(value)
         },
         message: 'e-mail inválido!',
       },
