@@ -51,7 +51,6 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['form-submitted']);
 const errors = ref({})
 
 function handleSubmit() {
